@@ -26,7 +26,7 @@ jobs:
       id-token: write
     concurrency:
       cancel-in-progress: false
-      group: deploy-cricket-ticket-booking-${{ github.event.inputs.stack || 'production' }}
+      group: deploy-cricket-ticket-${{ github.event.inputs.stack || 'production' }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -34,12 +34,12 @@ jobs:
         uses: DefangLabs/defang-github-action@v2
         with:
           command: ${{ github.event.inputs.action || 'up' }}
-          project: cricket-ticket-booking
+          project: cricket-ticket
           stack: ${{ github.event.inputs.stack || 'production' }}
       - name: Deployment Summary
         uses: DefangLabs/defang-github-action@v2
         with:
           command: services
-          project: cricket-ticket-booking
+          project: cricket-ticket
           stack: ${{ github.event.inputs.stack || 'production' }}
     environment: defang-production
